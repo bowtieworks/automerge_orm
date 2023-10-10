@@ -19,7 +19,7 @@ anyhow = "1.0.66"
 automerge-test = { workspace = true }
 autosurgeon = { workspace = true, features = ["uuid"] }
 futures = { version = "0.3.28", default-features = false, features = ["std"] }
-test_utils = { path = "../test_utils", default-features = false, features = ["automerge_repo", "automerge"] }
+test_utils = { path = "../test_utils", default-features = false, features = ["automerge_repo"] }
 uuid = { version = "1.2.1", features = ["v4"] }
 
 [features]

@@ -20,5 +20,5 @@ futures = { version = "0.3.28", default-features = false, features = ["std"], op
 [features]
 default = ["anyhow", "env"]
 anyhow = ["dep:anyhow"]
-automerge_repo = ["dep:automerge_repo", "dep:futures"]
+automerge_repo = ["dep:automerge", "dep:automerge_repo", "dep:futures"]
 env = ["dep:dotenvy"]
