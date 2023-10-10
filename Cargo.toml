@@ -1,0 +1,18 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/*",
+]
+
+[workspace.package]
+authors = ["Teoh Han Hui <teohhanhui@gmail.com>"]
+edition = "2021"
+rust-version = "1.65"
+repository = "https://github.com/bowtieworks/automerge_orm"
+license = "Apache-2.0"
+
+[workspace.dependencies]
+automerge = "0.5.0"
+automerge-test = "0.4.0"
+automerge_repo = { git = "https://github.com/issackelly/spanreed.git", branch="compaction" }
+autosurgeon = "0.8.0"

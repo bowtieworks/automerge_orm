@@ -1,0 +1,23 @@
+[package]
+name = "test_utils"
+version = "0.1.0"
+edition = { workspace = true }
+rust-version = { workspace = true }
+publish = false
+
+[lib]
+doctest = false
+
+[dependencies]
+anyhow = { version = "1.0.68", optional = true }
+automerge = { workspace = true, optional = true }
+automerge_repo = { workspace = true, optional = true }
+dotenvy = { version = "0.15.6", optional = true }
+futures = { version = "0.3.28", default-features = false, features = ["std"], optional = true }
+# avoid adding deps here, this crate is widely used in tests - it should compile fast!
+
+[features]
+default = ["anyhow", "env"]
+anyhow = ["dep:anyhow"]
+automerge_repo = ["dep:automerge_repo", "dep:futures"]
+env = ["dep:dotenvy"]

@@ -1,0 +1,26 @@
+[package]
+name = "automerge_orm"
+version = "0.1.0"
+authors = { workspace = true }
+edition = { workspace = true }
+rust-version = { workspace = true }
+repository = { workspace = true }
+license = { workspace = true }
+
+[dependencies]
+automerge = { workspace = true }
+automerge_orm_macros = { path = "../automerge_orm_macros" }
+automerge_repo = { workspace = true }
+autosurgeon = { workspace = true }
+uuid = "1.2.1"
+
+[dev-dependencies]
+anyhow = "1.0.66"
+automerge-test = { workspace = true }
+autosurgeon = { workspace = true, features = ["uuid"] }
+futures = { version = "0.3.28", default-features = false, features = ["std"] }
+test_utils = { path = "../test_utils", default-features = false, features = ["automerge_repo", "automerge"] }
+uuid = { version = "1.2.1", features = ["v4"] }
+
+[features]
+default = []
