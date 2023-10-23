@@ -1,8 +1,34 @@
 # automerge_orm
 
-An ORM for [Automerge].
+An ORM for [Automerge] to compliment [Autosurgeon]. It is most helpful in building structs from nested objects.
 
+Here is a partial example
+
+Automerge Document:
+
+    {
+        "contacts": {
+            "99A86DA1-78D5-4CE2-A429-395458F055EE": { "name": "ringo" },
+            "3A52D467-8BC9-4A81-BEDD-AB3768096351": { "name": "george" }, 
+        },
+        "bands": {
+            ...
+        }
+    }
+
+Rust:
+
+    #[derive(Entity, Hydrate, Reconcile)]
+
+    pub struct Contact {
+        pub id: uuid::Uuid,
+        pub name: String,
+    }
+
+It should be noted, that automerge_orm does not assist with any ACID type guarantees. This crate primairly manages the relationship between the document and your rust structs, not between two objects inside or between a document. 
+    
 [Automerge]: https://crates.io/crates/automerge
+[Autosurgeon]: https://crates.io/crates/autosurgeon
 
 ## Concepts
 
