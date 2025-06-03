@@ -12,7 +12,7 @@ repository = "https://github.com/bowtieworks/automerge_orm"
 license = "Apache-2.0"
 
 [workspace.dependencies]
-automerge = "0.5.0"
-automerge-test = "0.4.0"
-automerge_repo = { git = "https://github.com/issackelly/spanreed.git", branch="with-metrics" }
-autosurgeon = "0.8.0"
+automerge = { git = "https://github.com/bowtieworks/automerge.git", branch = "automerge3" }
+automerge-test = { git = "https://github.com/bowtieworks/automerge.git", branch = "automerge3" }
+automerge_repo = { git = "https://github.com/bowtieworks/automerge-repo-rs.git", branch = "automerge3" }
+autosurgeon = { git = "https://github.com/bowtieworks/autosurgeon.git", branch = "automerge3" }
