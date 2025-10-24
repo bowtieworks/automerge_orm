@@ -1,8 +1,8 @@
-use std::time::SystemTime;
+use std::{ops::RangeBounds, time::SystemTime};
 
 use automerge::{
     transaction::{CommitOptions, Transactable, Transaction as AutomergeTransaction},
-    Prop,
+    AutomergeError, ObjId, Prop, Value,
 };
 use autosurgeon::{reconcile_prop, Hydrate, ReadDoc, Reconcile};
 
@@ -915,5 +915,63 @@ impl<'a> Transaction<'a> {
     /// Rolls back all changes that have been queued up.
     pub fn rollback(self) {
         self.tx.rollback();
+    }
+}
+
+impl autosurgeon::ReadDoc for Transaction<'_> {
+    type Parents<'b>
+        = automerge::Parents<'b>
+    where
+        Self: 'b;
+    fn get_heads(&self) -> Vec<automerge::ChangeHash> {
+        automerge::transaction::Transactable::base_heads(&self.tx)
+    }
+
+    fn get<P: Into<automerge::Prop>>(
+        &self,
+        obj: &ObjId,
+        prop: P,
+    ) -> std::result::Result<Option<(Value<'_>, ObjId)>, AutomergeError> {
+        automerge::ReadDoc::get(&self.tx, obj, prop)
+    }
+
+    fn object_type<O: AsRef<ObjId>>(&self, obj: O) -> Option<automerge::ObjType> {
+        automerge::ReadDoc::object_type(&self.tx, obj)
+            .map(Some)
+            .unwrap_or(None)
+    }
+
+    fn map_range<'b, O: AsRef<ObjId>, R>(
+        &'b self,
+        obj: O,
+        range: R,
+    ) -> automerge::iter::MapRange<'b, R>
+    where
+        R: RangeBounds<String> + 'b,
+    {
+        automerge::ReadDoc::map_range(&self.tx, obj, range)
+    }
+
+    fn list_range<O: AsRef<ObjId>, R: RangeBounds<usize>>(
+        &self,
+        obj: O,
+        range: R,
+    ) -> automerge::iter::ListRange<'_, R> {
+        automerge::ReadDoc::list_range(&self.tx, obj, range)
+    }
+
+    fn length<O: AsRef<ObjId>>(&self, obj: O) -> usize {
+        automerge::ReadDoc::length(&self.tx, obj)
+    }
+
+    fn text<O: AsRef<ObjId>>(&self, obj: O) -> std::result::Result<String, AutomergeError> {
+        automerge::ReadDoc::text(&self.tx, obj)
+    }
+
+    fn parents<O: AsRef<ObjId>>(
+        &self,
+        obj: O,
+    ) -> std::result::Result<Self::Parents<'_>, AutomergeError> {
+        automerge::ReadDoc::parents(&self.tx, obj)
     }
 }
