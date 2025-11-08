@@ -14,5 +14,5 @@ license = "Apache-2.0"
 [workspace.dependencies]
 automerge = { git = "https://github.com/bowtieworks/automerge.git", branch = "automerge3" }
 automerge-test = { git = "https://github.com/bowtieworks/automerge.git", branch = "automerge3" }
-automerge_repo = { git = "https://github.com/bowtieworks/automerge-repo-rs.git", branch = "automerge3" }
+automerge_repo = { git = "https://github.com/bowtieworks/automerge-repo-rs.git", branch = "automerge3-2" }
 autosurgeon = { git = "https://github.com/bowtieworks/autosurgeon.git", branch = "automerge3" }
